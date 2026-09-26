@@ -43,3 +43,20 @@ def test_add_movie():
 
     assert response.status_code == 200
     assert b"Inception" in response.data
+
+
+def test_invalid_rating():
+    client = app.test_client()
+
+    response = client.post(
+        "/",
+        data={
+            "movie_name": "Avatar",
+            "genre": "Sci-Fi",
+            "rating": "6",
+            "status": "Watched"
+        }
+    )
+
+    assert response.status_code == 200
+    assert b"Rating must be between 0 and 5." in response.data
