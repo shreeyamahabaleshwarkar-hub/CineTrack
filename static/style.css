@@ -1,0 +1,99 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    color: #222;
+}
+
+.container {
+    width: 80%;
+    max-width: 900px;
+    margin: 50px auto;
+    background-color: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 42px;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 20px;
+    color: #666;
+}
+
+.welcome {
+    margin-top: 40px;
+}
+
+.welcome h2 {
+    font-size: 28px;
+}
+
+.welcome p {
+    font-size: 18px;
+    line-height: 1.6;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+label {
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+input,
+select {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+button {
+    margin-top: 15px;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background-color: #333;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+.movie-card {
+    background-color: #f7f7f7;
+    padding: 20px;
+    margin-top: 15px;
+    border-radius: 10px;
+    border-left: 5px solid #333;
+}
+
+.movie-card h3 {
+    margin-top: 0;
+    font-size: 22px;
+}
+
+.movie-card p {
+    margin: 8px 0;
+}
+.error {
+    background-color: #ffe5e5;
+    color: #b00020;
+    padding: 12px;
+    border-radius: 8px;
+    margin: 15px 0;
+    font-weight: bold;
+}

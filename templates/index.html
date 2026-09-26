@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CineTrack</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>🎬 CineTrack</h1>
+
+        <p class="subtitle">Your personal movie watchlist.</p>
+
+        <div class="welcome">
+            <h2>🍿 Welcome to CineTrack!</h2>
+
+            <p>
+                Keep track of movies you want to watch,
+                movies you have watched, and your ratings.
+            </p>
+        </div>
+
+        <hr>
+
+        <h2>➕ Add a Movie</h2>
+
+        {% if error %}
+             <p class="error">{{ error }}</p>
+        {% endif %}
+
+        <form method="POST">
+
+            <label for="movie_name">Movie Name</label>
+            <input
+                type="text"
+                id="movie_name"
+                name="movie_name"
+                required
+            >
+
+            <label for="genre">Genre</label>
+            <input
+                type="text"
+                id="genre"
+                name="genre"
+                required
+            >
+
+            <label for="rating">Rating</label>
+            <input
+                type="number"
+                id="rating"
+                name="rating"
+                min="0"
+                max="5"
+                step="0.5"
+                required
+            >
+
+            <label for="status">Status</label>
+            <select id="status" name="status" required>
+                <option value="Not Watched">Not Watched</option>
+                <option value="Watched">Watched</option>
+            </select>
+
+            <button type="submit">Add Movie</button>
+
+        </form>
+
+        <hr>
+
+        <h2>🎥 My Movies</h2>
+
+        {% if movies %}
+
+            {% for movie in movies %}
+
+                <div class="movie-card">
+                    <h3>{{ movie.name }}</h3>
+
+                    <p>Genre: {{ movie.genre }}</p>
+
+                    <p>Rating: ⭐ {{ movie.rating }}/5</p>
+
+                    <p>Status: {{ movie.status }}</p>
+                </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <p>No movies added yet. Add your first movie above! 🍿</p>
+
+        {% endif %}
+
+    </div>
+
+</body>
+</html>
