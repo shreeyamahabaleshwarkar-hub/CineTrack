@@ -1,8 +1,19 @@
 from flask import Flask, render_template, request
+import subprocess
 
 app = Flask(__name__)
 
 movies = []
+
+
+def get_commit_id():
+    try:
+        commit_id = subprocess.check_output(
+            ["git", "rev-parse", "--short", "HEAD"]
+        ).decode().strip()
+        return commit_id
+    except Exception:
+        return "local"
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -22,28 +33,32 @@ def home():
             error = "Rating is required."
 
         else:
-            rating_value = float(rating)
-
-            if rating_value < 0 or rating_value > 5:
-                error = "Rating must be between 0 and 5."
-
-            elif status not in ["Watched", "Not Watched"]:
-                error = "Invalid status."
-
+            try:
+                rating_value = float(rating)
+            except ValueError:
+                error = "Rating must be a number."
             else:
-                movie = {
-                    "name": movie_name,
-                    "genre": genre,
-                    "rating": rating,
-                    "status": status
-                }
+                if rating_value < 0 or rating_value > 5:
+                    error = "Rating must be between 0 and 5."
 
-                movies.append(movie)
+                elif status not in ["Watched", "Not Watched"]:
+                    error = "Invalid status."
+
+                else:
+                    movie = {
+                        "name": movie_name,
+                        "genre": genre,
+                        "rating": rating,
+                        "status": status
+                    }
+
+                    movies.append(movie)
 
     return render_template(
         "index.html",
         movies=movies,
-        error=error
+        error=error,
+        commit_id=get_commit_id()
     )
 
 
