@@ -78,5 +78,13 @@ def clear_movies():
     return redirect("/")
 
 
+@app.route("/delete/<int:movie_id>", methods=["POST"])
+def delete_movie(movie_id):
+    if 0 <= movie_id < len(movies):
+        movies.pop(movie_id)
+
+    return redirect("/")
+
+
 if __name__ == "__main__":
     app.run(debug=True)
