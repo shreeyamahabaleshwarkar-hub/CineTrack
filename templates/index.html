@@ -93,6 +93,10 @@
                     <p>Status: {{ movie.status }}</p>
                 </div>
 
+                <form action="/delete/{{ loop.index0 }}" method="POST">
+                     <button type="submit">🗑️ Delete</button>
+                </form>
+
             {% endfor %}
 
         {% else %}
