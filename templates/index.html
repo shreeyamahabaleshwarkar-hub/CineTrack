@@ -80,7 +80,7 @@
         {% if movies %}
 
         <h2>🎬 My Movie Watchlist</h2>
-        
+        <p>Total Movies: {{ movies|length }}</p>
             {% for movie in movies %}
 
                 <div class="movie-card">
