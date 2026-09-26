@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request,  redirect
 import subprocess
 
 app = Flask(__name__)
@@ -70,6 +70,12 @@ def health():
 @app.route("/api/movies")
 def get_movies():
     return movies
+
+
+@app.route("/clear", methods=["POST"])
+def clear_movies():
+    movies.clear()
+    return redirect("/")
 
 
 if __name__ == "__main__":
