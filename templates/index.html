@@ -81,6 +81,11 @@
 
         <h2>🎬 My Movie Watchlist</h2>
         <p>Total Movies: {{ movies|length }}</p>
+        {% if movies %}
+    <form action="/clear" method="POST">
+        <button type="submit">🗑️ Clear Watchlist</button>
+    </form>
+{% endif %}
             {% for movie in movies %}
 
                 <div class="movie-card">
