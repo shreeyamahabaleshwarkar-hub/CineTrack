@@ -6,117 +6,208 @@
 
     <title>CineTrack</title>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
 
     <div class="container">
 
-        <h1>🎬 CineTrack</h1>
+        <header class="header">
+            <h1>CineTrack</h1>
+            <p class="subtitle">Your personal movie watchlist.</p>
+        </header>
 
-        <p class="subtitle">Your personal movie watchlist.</p>
+        <section class="welcome">
+            <p class="welcome-label">YOUR MOVIE COLLECTION</p>
 
-        <div class="welcome">
-            <h2>🍿 Welcome to CineTrack!</h2>
+            <h2>Keep track of what you watch.</h2>
 
             <p>
-                Keep track of movies you want to watch,
-                movies you have watched, and your ratings.
+                Add movies to your watchlist, record your ratings,
+                and keep track of what you have watched.
             </p>
-        </div>
+        </section>
 
-        <hr>
+        <section class="form-section">
 
-        <h2>➕ Add a Movie</h2>
+            <div class="section-title">
+                <span>ADD A MOVIE</span>
+                <h2>Build your watchlist</h2>
+            </div>
 
-        {% if error %}
-             <p class="error">{{ error }}</p>
-        {% endif %}
+            {% if error %}
+                <p class="error">{{ error }}</p>
+            {% endif %}
 
-        <form method="POST">
+            <form method="POST">
 
-            <label for="movie_name">Movie Name</label>
-            <input
-                type="text"
-                id="movie_name"
-                name="movie_name"
-                required
-            >
+                <div class="form-row">
 
-            <label for="genre">Genre</label>
-            <input
-                type="text"
-                id="genre"
-                name="genre"
-                required
-            >
+                    <div class="form-group">
+                        <label for="movie_name">Movie Name</label>
+                        <input
+                            type="text"
+                            id="movie_name"
+                            name="movie_name"
+                            placeholder="e.g. Interstellar"
+                            required
+                        >
+                    </div>
 
-            <label for="rating">Rating</label>
-            <input
-                type="number"
-                id="rating"
-                name="rating"
-                min="0"
-                max="5"
-                step="0.5"
-                required
-            >
+                    <div class="form-group">
+                        <label for="genre">Genre</label>
+                        <input
+                            type="text"
+                            id="genre"
+                            name="genre"
+                            placeholder="e.g. Sci-Fi"
+                            required
+                        >
+                    </div>
 
-            <label for="status">Status</label>
-            <select id="status" name="status" required>
-                <option value="Not Watched">Not Watched</option>
-                <option value="Watched">Watched</option>
-            </select>
-
-            <button type="submit">Add Movie</button>
-
-        </form>
-
-        <hr>
-
-        <h2>🎥 My Movies</h2>
-
-        {% if movies %}
-
-        <h2>🎬 My Movie Watchlist</h2>
-        <p>Total Movies: {{ movies|length }}</p>
-        {% if movies %}
-    <form action="/clear" method="POST">
-        <button type="submit">🗑️ Clear Watchlist</button>
-    </form>
-{% endif %}
-            {% for movie in movies %}
-
-                <div class="movie-card">
-                    <h3>{{ movie.name }}</h3>
-
-                    <p>Genre: {{ movie.genre }}</p>
-
-                    <p>Rating: ⭐ {{ movie.rating }}/5</p>
-                    
-                    <p>🎭 Genre: {{ movie.genre }}</p>
-
-                    <p>Status: {{ movie.status }}</p>
                 </div>
 
-                <form action="/delete/{{ loop.index0 }}" method="POST">
-                     <button type="submit">🗑️ Delete</button>
-                </form>
+                <div class="form-row">
 
-            {% endfor %}
+                    <div class="form-group">
+                        <label for="rating">Rating</label>
+                        <input
+                            type="number"
+                            id="rating"
+                            name="rating"
+                            min="0"
+                            max="5"
+                            step="0.5"
+                            placeholder="0 - 5"
+                            required
+                        >
+                    </div>
 
-        {% else %}
+                    <div class="form-group">
+                        <label for="status">Status</label>
 
-            <p>No movies added yet. Add your first movie above! 🍿</p>
+                        <select id="status" name="status" required>
+                            <option value="Not Watched">Not Watched</option>
+                            <option value="Watched">Watched</option>
+                        </select>
+                    </div>
 
-        {% endif %}
+                </div>
+
+                <button type="submit" class="add-button">
+                    Add Movie
+                </button>
+
+            </form>
+
+        </section>
+
+        <section class="watchlist">
+
+            <div class="watchlist-header">
+
+                <div>
+                    <p class="section-title-small">YOUR COLLECTION</p>
+                    <h2>My Watchlist</h2>
+                </div>
+
+                <div class="watchlist-actions">
+
+                    <span class="movie-count">
+                        {{ movies|length }} Movies
+                    </span>
+
+                    {% if movies %}
+                        <form action="/clear" method="POST">
+                            <button type="submit" class="clear-button">
+                                Clear All
+                            </button>
+                        </form>
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+            {% if movies %}
+
+                <div class="movie-grid">
+
+                    {% for movie in movies %}
+
+                        <div class="movie-card">
+
+                            <div class="movie-info">
+
+                                <h3>{{ movie.name }}</h3>
+
+                                <p class="genre">
+                                    {{ movie.genre }}
+                                </p>
+
+                            </div>
+
+                            <div class="movie-details">
+
+                                <span class="rating">
+                                    {{ movie.rating }}/5
+                                </span>
+
+                                {% if movie.status == "Watched" %}
+                                    <span class="status watched">
+                                        Watched
+                                    </span>
+                                {% else %}
+                                    <span class="status">
+                                        Not Watched
+                                    </span>
+                                {% endif %}
+
+                            </div>
+
+                            <form
+                                action="/delete/{{ loop.index0 }}"
+                                method="POST"
+                            >
+                                <button
+                                    type="submit"
+                                    class="delete-button"
+                                >
+                                    Delete
+                                </button>
+                            </form>
+
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            {% else %}
+
+                <div class="empty-state">
+
+                    <div class="empty-line"></div>
+
+                    <h3>Your watchlist is empty</h3>
+
+                    <p>
+                        Add your first movie using the form above.
+                    </p>
+
+                </div>
+
+            {% endif %}
+
+        </section>
 
     </div>
 
- <footer>
-    Running commit: {{ commit_id }}
-</footer>
+    <footer>
+        Running commit: {{ commit_id }}
+    </footer>
 
 </body>
 </html>

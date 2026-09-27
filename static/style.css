@@ -1,99 +1,356 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background: #090a0f;
+    color: #f5f5f5;
     margin: 0;
     padding: 0;
-    color: #222;
 }
 
 .container {
-    width: 80%;
-    max-width: 900px;
-    margin: 50px auto;
-    background-color: white;
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 88%;
+    max-width: 1000px;
+    margin: 45px auto;
 }
 
-h1 {
-    font-size: 42px;
-    margin-bottom: 10px;
+/* Header */
+
+.header {
+    text-align: center;
+    padding: 35px 20px 30px;
+}
+
+.header h1 {
+    font-size: 48px;
+    margin: 0 0 8px;
+    letter-spacing: -1px;
 }
 
 .subtitle {
-    font-size: 20px;
-    color: #666;
+    font-size: 16px;
+    color: #858997;
+    margin: 0;
 }
 
+/* Welcome section */
+
 .welcome {
-    margin-top: 40px;
+    background: #11131a;
+    border: 1px solid #252832;
+    border-radius: 14px;
+    padding: 35px;
+    margin-bottom: 30px;
+}
+
+.welcome-label,
+.section-title,
+.section-title-small {
+    color: #8f82ff;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin: 0 0 10px;
 }
 
 .welcome h2 {
-    font-size: 28px;
+    font-size: 30px;
+    margin: 0 0 12px;
 }
 
 .welcome p {
-    font-size: 18px;
-    line-height: 1.6;
+    font-size: 15px;
+    line-height: 1.7;
+    color: #9da2ae;
+    margin: 0;
 }
+
+/* Add movie section */
+
+.form-section {
+    background: #11131a;
+    border: 1px solid #252832;
+    border-radius: 14px;
+    padding: 30px;
+    margin-bottom: 30px;
+}
+
+.section-title {
+    margin-bottom: 5px;
+}
+
+.section-title + h2 {
+    margin-top: 0;
+}
+
+.form-section h2 {
+    font-size: 24px;
+    margin-bottom: 25px;
+}
+
 form {
+    margin-top: 0;
+}
+
+.form-row {
+    display: flex;
+    gap: 18px;
+    margin-bottom: 18px;
+}
+
+.form-group {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    margin-top: 20px;
 }
 
 label {
+    font-size: 13px;
     font-weight: bold;
-    margin-top: 10px;
+    color: #d6d8de;
+    margin-bottom: 8px;
 }
 
 input,
 select {
-    padding: 12px;
-    border: 1px solid #ccc;
+    padding: 13px;
+    background: #0b0c11;
+    color: #f5f5f5;
+    border: 1px solid #30333d;
     border-radius: 8px;
-    font-size: 16px;
+    font-size: 14px;
+    outline: none;
+}
+
+input::placeholder {
+    color: #5f6470;
+}
+
+input:focus,
+select:focus {
+    border-color: #8f82ff;
 }
 
 button {
-    margin-top: 15px;
-    padding: 12px;
+    padding: 12px 18px;
     border: none;
     border-radius: 8px;
-    background-color: #333;
+    background: #7568d9;
     color: white;
-    font-size: 16px;
+    font-size: 14px;
     cursor: pointer;
 }
 
 button:hover {
-    background-color: #555;
+    background: #887bf0;
+}
+
+.add-button {
+    width: 100%;
+    margin-top: 5px;
+}
+
+/* Error */
+
+.error {
+    background: #2a1519;
+    color: #ff9da8;
+    border: 1px solid #55242b;
+    padding: 12px;
+    border-radius: 8px;
+    margin: 0 0 20px;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+/* Watchlist */
+
+.watchlist {
+    background: #11131a;
+    border: 1px solid #252832;
+    border-radius: 14px;
+    padding: 30px;
+}
+
+.watchlist-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.watchlist-header h2 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.section-title-small {
+    margin-bottom: 7px;
+}
+
+.watchlist-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.movie-count {
+    color: #858997;
+    font-size: 13px;
+}
+
+.clear-button {
+    background: transparent;
+    border: 1px solid #343743;
+    color: #aeb2bd;
+    padding: 8px 13px;
+}
+
+.clear-button:hover {
+    background: #191b23;
+    color: white;
+}
+
+/* Movie cards */
+
+.movie-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
 }
 
 .movie-card {
-    background-color: #f7f7f7;
+    background: #181a22;
+    border: 1px solid #292c36;
+    border-radius: 12px;
     padding: 20px;
-    margin-top: 15px;
-    border-radius: 10px;
-    border-left: 5px solid #333;
+    transition: 0.2s ease;
 }
 
-.movie-card h3 {
-    margin-top: 0;
-    font-size: 22px;
+.movie-card:hover {
+    border-color: #444856;
+    transform: translateY(-2px);
 }
 
-.movie-card p {
-    margin: 8px 0;
+.movie-info h3 {
+    margin: 0 0 7px;
+    font-size: 19px;
 }
-.error {
-    background-color: #ffe5e5;
-    color: #b00020;
-    padding: 12px;
-    border-radius: 8px;
-    margin: 15px 0;
+
+.genre {
+    margin: 0;
+    color: #858997;
+    font-size: 13px;
+}
+
+.movie-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 22px 0 17px;
+    padding-top: 15px;
+    border-top: 1px solid #292c36;
+}
+
+.rating {
+    color: #c9c2ff;
     font-weight: bold;
+    font-size: 14px;
+}
+
+.status {
+    background: #292c34;
+    color: #aeb2bd;
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.status.watched {
+    background: #173025;
+    color: #7ed9a0;
+}
+
+.delete-button {
+    background: transparent;
+    color: #777c88;
+    padding: 0;
+    font-size: 12px;
+}
+
+.delete-button:hover {
+    background: transparent;
+    color: #ff7d88;
+}
+
+/* Empty watchlist */
+
+.empty-state {
+    text-align: center;
+    padding: 45px 20px;
+    border: 1px dashed #30333d;
+    border-radius: 10px;
+}
+
+.empty-line {
+    width: 35px;
+    height: 3px;
+    background: #7568d9;
+    margin: 0 auto 18px;
+    border-radius: 5px;
+}
+
+.empty-state h3 {
+    margin: 0 0 8px;
+    font-size: 17px;
+}
+
+.empty-state p {
+    margin: 0;
+    color: #777c88;
+    font-size: 13px;
+}
+
+/* Footer */
+
+footer {
+    text-align: center;
+    color: #555a65;
+    font-size: 11px;
+    padding: 25px;
+}
+
+/* Mobile */
+
+@media (max-width: 700px) {
+
+    .container {
+        width: 92%;
+    }
+
+    .header h1 {
+        font-size: 40px;
+    }
+
+    .form-row {
+        flex-direction: column;
+    }
+
+    .movie-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .watchlist-header {
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .watchlist-actions {
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 8px;
+    }
 }
